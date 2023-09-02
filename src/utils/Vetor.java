@@ -28,6 +28,16 @@ public class Vetor {
         return false;
     }
 
+    public boolean adiciona(int elemento, int pos) {
+        if (pos > this.tamanho) return false;
+        for (int i = this.tamanho - 1; pos <= i; i--) {
+            this.elementos[i + 1] = this.elementos[i];
+        }
+        this.elementos[pos] = elemento;
+        this.tamanho++;
+        return true;
+    }
+
     public int getTamanho() {
         return tamanho;
     }
