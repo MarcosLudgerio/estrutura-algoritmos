@@ -12,6 +12,7 @@ public class Main {
         v.adiciona(521, 1);
         v.adiciona(98, 3);
 
+        System.out.println(v);
         v.removeElemento(52);
         System.out.println(v);
     }
