@@ -19,7 +19,7 @@ public class VetorObjeto {
 ////            }
 ////        }
 
-    public boolean adiciona(int elemento) {
+    public boolean adiciona(Object elemento) {
         aumentarCapacidade();
         if (this.tamanho < this.elementos.length) {
             this.elementos[this.tamanho] = elemento;
