@@ -3,6 +3,7 @@ import utils.Vetor;
 import utils.VetorObjeto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,13 +29,29 @@ public class Main {
 //        System.out.println(vo);
 
         Lista<String> listaGenerica = new Lista<>(5);
-        listaGenerica.adiciona("Elemento 1");
-        listaGenerica.adiciona("Elemento 2");
-        listaGenerica.adiciona("Elemento 3");
+//        listaGenerica.adiciona("Elemento 1");
+//        listaGenerica.adiciona("Elemento 2");
+//        listaGenerica.adiciona("Elemento 3");
 
+//        System.out.println(listaGenerica);
+//        System.out.println(listaGenerica.contem("Elemento 2"));
+//        System.out.println(listaGenerica.contem("Elemento 5"));
+
+
+        listaGenerica.adiciona("A");
+        listaGenerica.adiciona("B");
+        listaGenerica.adiciona("B");
+        listaGenerica.adiciona("C");
+        listaGenerica.adiciona("D");
+        listaGenerica.adiciona("B");
+        listaGenerica.adiciona("B");
+        listaGenerica.adiciona("M");
+
+//        System.out.println(listaGenerica.ultimoIndice("K"));
         System.out.println(listaGenerica);
-        System.out.println(listaGenerica.contem("Elemento 2"));
-        System.out.println(listaGenerica.contem("Elemento 5"));
-
+        listaGenerica.removeElemento(2);
+        System.out.println(listaGenerica);
+        listaGenerica.removeElemento("M");
+        System.out.println(listaGenerica);
     }
 }

@@ -42,16 +42,26 @@ public class Lista<T> {
     }
 
 
-    public void removeElemento(T elemento) {
+    public int removeElemento(T elemento) {
         int pos = this.posicao(elemento);
-        for (int i = pos; i < this.tamanho - 1; i++) {
+        for (int i = pos; i < this.tamanho; i++) {
             this.elementos[i] = this.elementos[i + 1];
         }
         this.tamanho--;
+        return pos;
     }
 
+    public int removeElemento(int posicao) {
+        for (int i = posicao; i < this.tamanho - 1; i++) {
+            this.elementos[i] = this.elementos[i + 1];
+        }
+        this.tamanho--;
+        return -1;
+    }
+
+
     private int posicao(T elemento) {
-        for (int i = 0; i < this.tamanho - 1; i++) {
+        for (int i = 0; i < this.tamanho; i++) {
             if (this.elementos[i].equals(elemento)) {
                 return i;
             }
@@ -85,6 +95,17 @@ public class Lista<T> {
         return this.posicao(elemento) >= 0;
     }
 
+
+    public int ultimoIndice(T elemento){
+        int ultimo = -1;
+        for (int i = 0; i < this.tamanho; i++) {
+
+            if (this.elementos[i].equals(elemento)) {
+                ultimo = i;
+            }
+        }
+        return ultimo;
+    }
 
 
     @Override
