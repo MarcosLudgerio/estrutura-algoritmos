@@ -50,9 +50,9 @@ public class Lista<T> {
         this.tamanho--;
     }
 
-    private int posicao(T elemento){
+    private int posicao(T elemento) {
         for (int i = 0; i < this.tamanho - 1; i++) {
-            if(this.elementos[i].equals(elemento)){
+            if (this.elementos[i].equals(elemento)) {
                 return i;
             }
         }
@@ -80,6 +80,12 @@ public class Lista<T> {
             this.elementos = novaLista;
         }
     }
+
+    public boolean contem(T elemento) {
+        return this.posicao(elemento) >= 0;
+    }
+
+
 
     @Override
     public String toString() {

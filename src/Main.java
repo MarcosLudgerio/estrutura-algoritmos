@@ -33,6 +33,8 @@ public class Main {
         listaGenerica.adiciona("Elemento 3");
 
         System.out.println(listaGenerica);
+        System.out.println(listaGenerica.contem("Elemento 2"));
+        System.out.println(listaGenerica.contem("Elemento 5"));
 
     }
 }
