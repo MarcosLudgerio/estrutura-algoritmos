@@ -6,11 +6,9 @@ public class Vetor {
     private int[] elementos;
     private int tamanho;
 
-    private int capacidade;
 
     public Vetor(int capacidade) {
         this.elementos = new int[capacidade];
-        this.capacidade = capacidade;
         tamanho = 0;
     }
 
@@ -45,6 +43,25 @@ public class Vetor {
         return true;
     }
 
+
+    public void removeElemento(int elemento) {
+        int pos = this.posicao(elemento);
+        for (int i = pos; i < this.tamanho - 1; i++) {
+            this.elementos[i] = this.elementos[i + 1];
+        }
+        this.tamanho--;
+    }
+
+    private int posicao(int elemento){
+        for (int i = 0; i < this.tamanho - 1; i++) {
+            if(this.elementos[i] == elemento){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
     public int busca(int posicao) {
         if (!(posicao >= 0 && posicao < this.tamanho)) {
             throw new IllegalArgumentException("Posição inválida");
@@ -57,9 +74,8 @@ public class Vetor {
     }
 
     private void aumentarCapacidade() {
-        if (getTamanho() == this.capacidade) {
-            this.capacidade *= this.capacidade;
-            int[] novaLista = new int[this.capacidade];
+        if (getTamanho() == this.elementos.length) {
+            int[] novaLista = new int[this.elementos.length * 2];
             for (int i = 0; i < elementos.length; i++) {
                 novaLista[i] = elementos[i];
             }
