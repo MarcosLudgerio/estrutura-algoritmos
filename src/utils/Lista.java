@@ -1,17 +1,24 @@
 package utils;
 
-public class VetorObjeto {
+import java.lang.reflect.Array;
 
-    private Object[] elementos;
+public class Lista<T> {
+
+    private T[] elementos;
     private int tamanho;
 
 
-    public VetorObjeto(int capacidade) {
-        this.elementos = new Object[capacidade];
+    public Lista(int capacidade) {
+        this.elementos = (T[]) new Object[capacidade];
         tamanho = 0;
     }
 
-    public boolean adiciona(Object elemento) {
+    public Lista(int capacidade, Class<T> tipo) {
+        this.elementos = (T[]) Array.newInstance(tipo, capacidade);
+        tamanho = 0;
+    }
+
+    public boolean adiciona(T elemento) {
         aumentarCapacidade();
         if (this.tamanho < this.elementos.length) {
             this.elementos[this.tamanho] = elemento;
@@ -21,7 +28,7 @@ public class VetorObjeto {
         return false;
     }
 
-    public boolean adiciona(int elemento, int pos) {
+    public boolean adiciona(T elemento, int pos) {
         aumentarCapacidade();
         if (!(pos >= 0 && pos < this.tamanho)) {
             throw new IllegalArgumentException("Posição inválida");
@@ -35,7 +42,7 @@ public class VetorObjeto {
     }
 
 
-    public void removeElemento(int elemento) {
+    public void removeElemento(T elemento) {
         int pos = this.posicao(elemento);
         for (int i = pos; i < this.tamanho - 1; i++) {
             this.elementos[i] = this.elementos[i + 1];
@@ -43,7 +50,7 @@ public class VetorObjeto {
         this.tamanho--;
     }
 
-    private int posicao(Object elemento){
+    private int posicao(T elemento){
         for (int i = 0; i < this.tamanho - 1; i++) {
             if(this.elementos[i].equals(elemento)){
                 return i;
@@ -66,7 +73,7 @@ public class VetorObjeto {
 
     private void aumentarCapacidade() {
         if (getTamanho() == this.elementos.length) {
-            Object[] novaLista = new Object[this.elementos.length * 2];
+            T[] novaLista = (T[]) new Object[this.elementos.length * 2];
             for (int i = 0; i < elementos.length; i++) {
                 novaLista[i] = elementos[i];
             }

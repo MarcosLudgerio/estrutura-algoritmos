@@ -1,5 +1,8 @@
+import utils.Lista;
 import utils.Vetor;
 import utils.VetorObjeto;
+
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,11 +20,19 @@ public class Main {
 //        v.removeElemento(52);
 //        System.out.println(v);
 
-        VetorObjeto vo = new VetorObjeto(5);
-        vo.adiciona("Teste");
-        vo.adiciona("Teste 1");
-        vo.adiciona("Teste 2");
+//        VetorObjeto vo = new VetorObjeto(5);
+//        vo.adiciona("Teste");
+//        vo.adiciona("Teste 1");
+//        vo.adiciona("Teste 2");
+//
+//        System.out.println(vo);
 
-        System.out.println(vo);
+        Lista<String> listaGenerica = new Lista<>(5);
+        listaGenerica.adiciona("Elemento 1");
+        listaGenerica.adiciona("Elemento 2");
+        listaGenerica.adiciona("Elemento 3");
+
+        System.out.println(listaGenerica);
+
     }
 }
