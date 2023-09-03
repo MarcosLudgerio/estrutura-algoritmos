@@ -44,9 +44,8 @@ public class Lista<T> {
 
     public int removeElemento(T elemento) {
         int pos = this.posicao(elemento);
-        for (int i = pos; i < this.tamanho; i++) {
-            this.elementos[i] = this.elementos[i + 1];
-        }
+        if (pos < 0) return -1;
+        this.removeElemento(pos);
         this.tamanho--;
         return pos;
     }
@@ -96,7 +95,7 @@ public class Lista<T> {
     }
 
 
-    public int ultimoIndice(T elemento){
+    public int ultimoIndice(T elemento) {
         int ultimo = -1;
         for (int i = 0; i < this.tamanho; i++) {
 
