@@ -12,6 +12,10 @@ public class Lista<T> {
         this.elementos = (T[]) new Object[capacidade];
         tamanho = 0;
     }
+    public Lista() {
+        this.elementos = (T[]) new Object[10];
+        tamanho = 0;
+    }
 
     public Lista(int capacidade, Class<T> tipo) {
         this.elementos = (T[]) Array.newInstance(tipo, capacidade);
@@ -76,6 +80,10 @@ public class Lista<T> {
         return this.elementos[posicao];
     }
 
+    public void limpar(){
+        this.tamanho = 0;
+    }
+
     public int getTamanho() {
         return tamanho;
     }
@@ -87,6 +95,7 @@ public class Lista<T> {
                 novaLista[i] = elementos[i];
             }
             this.elementos = novaLista;
+            this.tamanho = novaLista.length;
         }
     }
 

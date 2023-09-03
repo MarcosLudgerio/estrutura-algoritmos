@@ -54,5 +54,7 @@ public class Main {
         listaGenerica.removeElemento("D");
         System.out.println(listaGenerica);
         System.out.println(listaGenerica.busca(2));
+        listaGenerica.limpar();
+        System.out.println(listaGenerica);
     }
 }
