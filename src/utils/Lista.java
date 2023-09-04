@@ -12,6 +12,7 @@ public class Lista<T> {
         this.elementos = (T[]) new Object[capacidade];
         tamanho = 0;
     }
+
     public Lista() {
         this.elementos = (T[]) new Object[10];
         tamanho = 0;
@@ -34,7 +35,7 @@ public class Lista<T> {
 
     public boolean adiciona(T elemento, int pos) {
         aumentarCapacidade();
-        if(this.tamanho == 0){
+        if (this.tamanho == 0) {
             this.elementos[0] = elemento;
             this.tamanho++;
             return true;
@@ -59,20 +60,15 @@ public class Lista<T> {
         return pos;
     }
 
-    public int removeElemento(T elemento) {
-        int pos = this.posicao(elemento);
-        if (pos < 0) return -1;
-        this.removeElemento(pos);
-        this.tamanho--;
-        return pos;
-    }
-
     public int removeElemento(int posicao) {
+        if (!(posicao >= 0 && posicao < this.tamanho)) {
+            return -1;
+        }
         for (int i = posicao; i < this.tamanho - 1; i++) {
             this.elementos[i] = this.elementos[i + 1];
         }
         this.tamanho--;
-        return -1;
+        return 1;
     }
 
 
@@ -93,7 +89,7 @@ public class Lista<T> {
         return this.elementos[posicao];
     }
 
-    public void limpar(){
+    public void limpar() {
         this.tamanho = 0;
     }
 
@@ -120,12 +116,15 @@ public class Lista<T> {
     public int ultimoIndice(T elemento) {
         int ultimo = -1;
         for (int i = 0; i < this.tamanho; i++) {
-
             if (this.elementos[i].equals(elemento)) {
                 ultimo = i;
             }
         }
         return ultimo;
+    }
+
+    public Object ultimoIndice() {
+        return this.elementos[tamanho - 1];
     }
 
 

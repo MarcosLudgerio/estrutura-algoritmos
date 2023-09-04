@@ -21,6 +21,7 @@ public class ContatoTeste {
                     adicionarContato(listaDeContatos, io);
                     break;
                 case "2": // Adicionar contato em uma posição
+
                     System.out.println("Informe a posição do contato");
                     String pos = io.nextLine();
                     posicao = validarPosicao(pos);
@@ -28,36 +29,52 @@ public class ContatoTeste {
                     adicionarContato(listaDeContatos, io, posicao);
                     break;
                 case "3": // Recuperar contato por posição
+                    if (listaDeContatos.getTamanho() == 0) {
+                        System.out.println("NENHUM CONTATO NA LISTA");
+                        break;
+                    }
                     System.out.println("INFORME A POSIÇÃO DO CONTATO");
                     number = io.nextLine();
                     posicao = validarPosicao(number);
                     visualizarUmContato(listaDeContatos, posicao);
                     break;
-                case "4": // Excluir contato
+                case "4": // Excluir contato por posição
+                    if (listaDeContatos.getTamanho() == 0) {
+                        System.out.println("NENHUM CONTATO NA LISTA");
+                        break;
+                    }
                     System.out.println("INFORME A POSIÇÃO DO CONTATO: ");
                     number = io.nextLine();
                     posicao = validarPosicao(number);
-                    listaDeContatos.removeElemento(posicao);
-                    break;
-                case "5": // Excluir contato por posição
-                    System.out.println("opção 5");
-                    break;
-                case "6": // Excluir contato específico
-                    System.out.println("opção 6");
+                    int i = listaDeContatos.removeElemento(posicao);
+                    if (i >= 0) System.out.println("CONTATO REMOVIDO COM SUCESSO!");
+                    else System.out.println("ERRO AO REMOVER CONTATO");
                     break;
                 case "7": //Consultar ultimo indice
-                    System.out.println("opção 7");
+                    if (listaDeContatos.getTamanho() == 0) {
+                        System.out.println("NENHUM CONTATO NA LISTA");
+                        break;
+                    }
+                    listaDeContatos.ultimoIndice();
                     break;
                 case "8": // Verificar se contato existe
+                    if (listaDeContatos.getTamanho() == 0) {
+                        System.out.println("NENHUM CONTATO NA LISTA");
+                        break;
+                    }
                     System.out.println("opção 8");
                     break;
                 case "9": // Tamanho da lista de contatos
-                    System.out.println("opção 9");
+                    System.out.println("O TAMANHO DA LISTA É: " + listaDeContatos.getTamanho());
                     break;
                 case "10":  // Limpar todos os dados
                     System.out.println("opção 10");
                     break;
                 case "11": // Visualizar lista
+                    if (listaDeContatos.getTamanho() == 0) {
+                        System.out.println("NENHUM CONTATO NA LISTA");
+                        break;
+                    }
                     listagem(listaDeContatos);
                     break;
                 case "12": // Exibir Menu
