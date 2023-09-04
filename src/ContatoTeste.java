@@ -8,6 +8,8 @@ public class ContatoTeste {
     public static void main(String[] args) {
 
         Scanner io = new Scanner(System.in);
+        int posicao = -1;
+        String number;
 
         Lista<Contato> listaDeContatos = new Lista<>();
         exibeMenu();
@@ -21,20 +23,21 @@ public class ContatoTeste {
                 case "2": // Adicionar contato em uma posição
                     System.out.println("Informe a posição do contato");
                     String pos = io.nextLine();
-                    int posicao = -1;
-                    try{
-                        posicao = Integer.parseInt(pos);
-                    }catch (Exception ex){
-                        System.out.println("Insira um número inteiro!");
-                        break;
-                    }
+                    posicao = validarPosicao(pos);
+
                     adicionarContato(listaDeContatos, io, posicao);
                     break;
                 case "3": // Recuperar contato por posição
-                    System.out.println("opção 3");
+                    System.out.println("INFORME A POSIÇÃO DO CONTATO");
+                    number = io.nextLine();
+                    posicao = validarPosicao(number);
+                    visualizarUmContato(listaDeContatos, posicao);
                     break;
-                case "4": // Excluir posição
-                    System.out.println("opção 4");
+                case "4": // Excluir contato
+                    System.out.println("INFORME A POSIÇÃO DO CONTATO: ");
+                    number = io.nextLine();
+                    posicao = validarPosicao(number);
+                    listaDeContatos.removeElemento(posicao);
                     break;
                 case "5": // Excluir contato por posição
                     System.out.println("opção 5");
@@ -57,8 +60,8 @@ public class ContatoTeste {
                 case "11": // Visualizar lista
                     listagem(listaDeContatos);
                     break;
-                case "12": // Ver detalhes de um contato
-                    listagem(listaDeContatos);
+                case "12": // Exibir Menu
+                    exibeMenu();
                     break;
                 default:
                     System.out.println("Escolha uma opção válida!");
@@ -124,6 +127,15 @@ public class ContatoTeste {
         lista.adiciona(criarObjetoContato(io), posicao);
     }
 
+    private static int validarPosicao(String number) {
+        int posicao = -1;
+        try {
+            posicao = Integer.parseInt(number);
+        } catch (Exception ex) {
+            System.out.println("Insira um número inteiro!");
+        }
+        return posicao;
+    }
 
     public static Contato criarObjetoContato(Scanner io) {
         String nome, email, telefone;

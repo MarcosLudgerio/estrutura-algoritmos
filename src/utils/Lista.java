@@ -34,7 +34,12 @@ public class Lista<T> {
 
     public boolean adiciona(T elemento, int pos) {
         aumentarCapacidade();
-        if (!(pos >= 0 && pos < this.tamanho)) {
+        if(this.tamanho == 0){
+            this.elementos[0] = elemento;
+            this.tamanho++;
+            return true;
+        }
+        if (!(pos > 0 && pos < this.tamanho)) {
             throw new IllegalArgumentException("Posição inválida");
         }
         for (int i = this.tamanho - 1; pos <= i; i--) {
@@ -45,6 +50,14 @@ public class Lista<T> {
         return true;
     }
 
+
+    public int removeElemento(T elemento) {
+        int pos = this.posicao(elemento);
+        if (pos < 0) return -1;
+        this.removeElemento(pos);
+        this.tamanho--;
+        return pos;
+    }
 
     public int removeElemento(T elemento) {
         int pos = this.posicao(elemento);
