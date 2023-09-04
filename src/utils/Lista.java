@@ -40,7 +40,7 @@ public class Lista<T> {
             this.tamanho++;
             return true;
         }
-        if (!(pos > 0 && pos < this.tamanho)) {
+        if (!(pos >= 0 && pos < this.tamanho)) {
             throw new IllegalArgumentException("Posição inválida");
         }
         for (int i = this.tamanho - 1; pos <= i; i--) {

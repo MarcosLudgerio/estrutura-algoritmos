@@ -21,20 +21,14 @@ public class ContatoTeste {
                     adicionarContato(listaDeContatos, io);
                     break;
                 case "2": // Adicionar contato em uma posição
-
-                    System.out.println("Informe a posição do contato");
-                    String pos = io.nextLine();
-                    posicao = validarPosicao(pos);
-
-                    adicionarContato(listaDeContatos, io, posicao);
-
+                    adicionarContatoNaPosicao(listaDeContatos, io);
                     break;
                 case "3": // Recuperar contato por posição
                     if (listaDeContatos.getTamanho() == 0) {
                         System.out.println("NENHUM CONTATO NA LISTA");
                         break;
                     }
-                    System.out.println("INFORME A POSIÇÃO DO CONTATO");
+                    System.out.println("INFORME A POSIÇÃO DO CONTATO QUE DESEJA VER");
                     number = io.nextLine();
                     posicao = validarPosicao(number);
                     visualizarUmContato(listaDeContatos, posicao);
@@ -44,7 +38,7 @@ public class ContatoTeste {
                         System.out.println("NENHUM CONTATO NA LISTA");
                         break;
                     }
-                    System.out.println("INFORME A POSIÇÃO DO CONTATO: ");
+                    System.out.println("INFORME A POSIÇÃO DO CONTATO QUE DESEJA EXCLUIR: ");
                     number = io.nextLine();
                     posicao = validarPosicao(number);
                     int i = listaDeContatos.removeElemento(posicao);
@@ -63,7 +57,7 @@ public class ContatoTeste {
                         System.out.println("NENHUM CONTATO NA LISTA");
                         break;
                     }
-                    System.out.println("INFORME A POSIÇÃO DO CONTATO: ");
+                    System.out.println("INFORME A POSIÇÃO DO CONTATO QUE DESEJA SABER SE EXISTE: ");
                     number = io.nextLine();
                     posicao = validarPosicao(number);
                     Contato c = (Contato) listaDeContatos.busca(posicao);
@@ -129,6 +123,18 @@ public class ContatoTeste {
         return io.nextLine();
     }
 
+    private static int inserirInformacaoInteira(String msg, Scanner io) {
+        System.out.println(msg);
+        String number = io.nextLine();
+        return validarPosicao(number);
+    }
+
+    private static String inserirInformacaoString(String msg, Scanner io) {
+        System.out.println(msg);
+        String number = io.nextLine();
+        return number;
+    }
+
     private static void criarVariosContatos(int quantidade, Lista<Contato> lista) {
         for (int i = 0; i <= quantidade; i++) {
             String nome = "Contato " + i;
@@ -143,7 +149,8 @@ public class ContatoTeste {
         lista.adiciona(criarObjetoContato(io));
     }
 
-    private static void adicionarContato(Lista<Contato> lista, Scanner io, int posicao) {
+    private static void adicionarContatoNaPosicao(Lista<Contato> lista, Scanner io) {
+        int posicao = inserirInformacaoInteira("INFORME A POSIÇÃO QUE DESEJA ADICIONAR O CONTATO", io);
         lista.adiciona(criarObjetoContato(io), posicao);
     }
 
@@ -159,14 +166,15 @@ public class ContatoTeste {
 
     public static Contato criarObjetoContato(Scanner io) {
         String nome, email, telefone;
-        System.out.println("INFORME O NOME DO CONTATO: ");
-        nome = io.nextLine();
-        System.out.println("INFORME O EMAIL DO CONTATO: ");
-        email = io.nextLine();
-        System.out.println("INFORME O TELEFONE DO CONTATO: ");
-        telefone = io.nextLine();
+        nome = inserirInformacaoString("INFORME O NOME: ", io);
+        email = inserirInformacaoString("INFORME O EMAIL: ", io);
+        telefone = inserirInformacaoString("INFORME O TELEFONE: ", io);
         return new Contato(nome, email, telefone);
     }
 
-
+    public static void validarTamanhoDaLista(Lista<Contato> lista) throws Exception {
+        if (lista.getTamanho() == 0) {
+            throw new Exception("NENHUM CONTATO NA LISTA");
+        }
+    }
 }
