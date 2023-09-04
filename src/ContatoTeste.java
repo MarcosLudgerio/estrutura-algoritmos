@@ -8,8 +8,6 @@ public class ContatoTeste {
     public static void main(String[] args) {
 
         Scanner io = new Scanner(System.in);
-        int posicao = -1;
-        String number;
 
         Lista<Contato> listaDeContatos = new Lista<>();
         exibeMenu();
@@ -17,65 +15,53 @@ public class ContatoTeste {
 
         while (!opcao.equals("0")) {
             switch (opcao) {
-                case "1": // Adicionar novo contato ao final
+                case "1":
                     adicionarContato(listaDeContatos, io);
                     break;
-                case "2": // Adicionar contato em uma posição
+                case "2":
                     adicionarContatoNaPosicao(listaDeContatos, io);
                     break;
                 case "3": // Recuperar contato por posição
-                    if (listaDeContatos.getTamanho() == 0) {
-                        System.out.println("NENHUM CONTATO NA LISTA");
-                        break;
+                    try {
+                        visualizarUmContato(listaDeContatos, io);
+                    } catch (Exception e) {
+                        System.out.println("ALGO DEU ERRADO POR FAVOR, VERIFIQUE OS DADOS");
                     }
-                    System.out.println("INFORME A POSIÇÃO DO CONTATO QUE DESEJA VER");
-                    number = io.nextLine();
-                    posicao = validarPosicao(number);
-                    visualizarUmContato(listaDeContatos, posicao);
                     break;
-                case "4": // Excluir contato por posição
-                    if (listaDeContatos.getTamanho() == 0) {
+                case "4":
+                    try {
+                        apagarContato(listaDeContatos, io);
+                    } catch (Exception e) {
                         System.out.println("NENHUM CONTATO NA LISTA");
-                        break;
                     }
-                    System.out.println("INFORME A POSIÇÃO DO CONTATO QUE DESEJA EXCLUIR: ");
-                    number = io.nextLine();
-                    posicao = validarPosicao(number);
-                    int i = listaDeContatos.removeElemento(posicao);
-                    if (i >= 0) System.out.println("CONTATO REMOVIDO COM SUCESSO!");
-                    else System.out.println("ERRO AO REMOVER CONTATO");
                     break;
-                case "5": //Consultar ultimo indice
-                    if (listaDeContatos.getTamanho() == 0) {
+                case "5":
+                    try {
+                        ultimoIndiceContato(listaDeContatos);
+                    } catch (Exception e) {
                         System.out.println("NENHUM CONTATO NA LISTA");
-                        break;
                     }
-                    listaDeContatos.ultimoIndice();
                     break;
-                case "6": // Verificar se contato existe
-                    if (listaDeContatos.getTamanho() == 0) {
+                case "6":
+                    try {
+                        if (recuperarContato(listaDeContatos, io))
+                            System.out.println("CONTATO EXISTE NA LISTA");
+                    } catch (Exception e) {
                         System.out.println("NENHUM CONTATO NA LISTA");
-                        break;
                     }
-                    System.out.println("INFORME A POSIÇÃO DO CONTATO QUE DESEJA SABER SE EXISTE: ");
-                    number = io.nextLine();
-                    posicao = validarPosicao(number);
-                    Contato c = (Contato) listaDeContatos.busca(posicao);
-                    boolean contem = listaDeContatos.contem(c);
-                    if (contem) System.out.println("CONTATO EXISTE NA LISTA");
                     break;
-                case "7": // Tamanho da lista de contatos
-                    System.out.println("O TAMANHO DA LISTA É: " + listaDeContatos.getTamanho());
+                case "7":
+                    exibirTamanhoDaLista(listaDeContatos);
                     break;
-                case "8":  // Limpar todos os dados
-                    listaDeContatos.limpar();
+                case "8":
+                    limparLista(listaDeContatos);
                     break;
-                case "9": // Visualizar lista
-                    if (listaDeContatos.getTamanho() == 0) {
+                case "9":
+                    try {
+                        listagem(listaDeContatos);
+                    } catch (Exception e) {
                         System.out.println("NENHUM CONTATO NA LISTA");
-                        break;
                     }
-                    listagem(listaDeContatos);
                     break;
                 case "10": // Exibir Menu
                     exibeMenu();
@@ -103,19 +89,30 @@ public class ContatoTeste {
         System.out.println("0 - Sair");
     }
 
-    public static void listagem(Lista<Contato> lista) {
+    public static void listagem(Lista<Contato> lista) throws Exception {
+        validarTamanhoDaLista(lista);
         for (int i = 0; i < lista.getTamanho(); i++) {
             Contato c = (Contato) lista.busca(i);
             System.out.println(i + " - " + c.getNome());
         }
     }
 
-    public static void visualizarUmContato(Lista<Contato> lista, int pos) {
-        Contato c = (Contato) lista.busca(pos);
+    public static void visualizarUmContato(Lista<Contato> lista, Scanner io) throws Exception {
+        validarTamanhoDaLista(lista);
+        int posicao = inserirInformacaoInteira("INFORME A POSIÇÃO DO CONTATO QUE DESEJA VER", io);
+        Contato c = (Contato) lista.busca(posicao);
         System.out.println("Nome: " + c.getNome());
         System.out.println("Telefone: " + c.getTelefone());
         System.out.println("Email: " + c.getEmail());
 
+    }
+
+    public static void apagarContato(Lista<Contato> lista, Scanner io) throws Exception {
+        validarTamanhoDaLista(lista)
+        int number = inserirInformacaoInteira("INFORME A POSIÇÃO DO CONTATO QUE DESEJA EXCLUIR: ", io);
+        int i = lista.removeElemento(number);
+        if (i >= 0) System.out.println("CONTATO REMOVIDO COM SUCESSO!");
+        else System.out.println("ERRO AO REMOVER CONTATO");
     }
 
     private static String opcaoMenu(Scanner io) {
@@ -176,5 +173,26 @@ public class ContatoTeste {
         if (lista.getTamanho() == 0) {
             throw new Exception("NENHUM CONTATO NA LISTA");
         }
+    }
+
+    public static void ultimoIndiceContato(Lista<Contato> lista) throws Exception {
+        validarTamanhoDaLista(lista);
+        lista.ultimoIndice();
+    }
+
+    public static boolean recuperarContato(Lista<Contato> lista, Scanner io) throws Exception {
+        validarTamanhoDaLista(lista);
+        int number = inserirInformacaoInteira("INFORME A POSIÇÃO DO CONTATO QUE DESEJA SABER SE EXISTE: ", io);
+        Contato c = (Contato) lista.busca(number);
+        return lista.contem(c);
+    }
+
+    public static void exibirTamanhoDaLista(Lista<Contato> lista){
+        System.out.println("O TAMANHO DA LISTA É: " + lista.getTamanho());
+    }
+
+    public static void limparLista(Lista<Contato> lista){
+        lista.limpar();
+        System.out.println("TODOS OS ITENS DA LISTA FORAM EXCLUIDOS!");
     }
 }
