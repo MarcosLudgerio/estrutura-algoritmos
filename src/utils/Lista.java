@@ -14,8 +14,7 @@ public class Lista<T> {
     }
 
     public Lista() {
-        this.elementos = (T[]) new Object[10];
-        tamanho = 0;
+        this(10);
     }
 
     public Lista(int capacidade, Class<T> tipo) {
@@ -111,8 +110,6 @@ public class Lista<T> {
     public boolean contem(T elemento) {
         return this.posicao(elemento) >= 0;
     }
-
-
     public int ultimoIndice(T elemento) {
         int ultimo = -1;
         for (int i = 0; i < this.tamanho; i++) {
@@ -126,8 +123,6 @@ public class Lista<T> {
     public Object ultimoIndice() {
         return this.elementos[tamanho - 1];
     }
-
-
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

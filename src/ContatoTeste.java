@@ -108,7 +108,7 @@ public class ContatoTeste {
     }
 
     public static void apagarContato(Lista<Contato> lista, Scanner io) throws Exception {
-        validarTamanhoDaLista(lista)
+        validarTamanhoDaLista(lista);
         int number = inserirInformacaoInteira("INFORME A POSIÇÃO DO CONTATO QUE DESEJA EXCLUIR: ", io);
         int i = lista.removeElemento(number);
         if (i >= 0) System.out.println("CONTATO REMOVIDO COM SUCESSO!");
