@@ -1,8 +1,8 @@
 package utils.estatica;
 
 public class EstruturaBase<T> {
-    private T[] elementos;
-    private int tamanho;
+    protected T[] elementos;
+    protected int tamanho;
 
 
     public EstruturaBase(int capacidade) {
@@ -48,8 +48,8 @@ public class EstruturaBase<T> {
             for (int i = 0; i < elementos.length; i++) {
                 novaLista[i] = elementos[i];
             }
+            this.tamanho = elementos.length;
             this.elementos = novaLista;
-            this.tamanho = novaLista.length;
         }
     }
 

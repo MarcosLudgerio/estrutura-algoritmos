@@ -18,7 +18,7 @@ public class EstruturaEstatica<T> extends EstruturaBase<T> {
         super.aumentarCapacidade();
     }
 
-    protected int getTamanho() {
+    public int getTamanho() {
         return super.getTamanho();
     }
     @Override
