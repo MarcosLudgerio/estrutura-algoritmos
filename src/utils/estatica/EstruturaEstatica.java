@@ -25,4 +25,8 @@ public class EstruturaEstatica<T> extends EstruturaBase<T> {
     public String toString() {
       return super.toString();
     }
+
+    public boolean estaVazia(){
+        return tamanho == 0;
+    }
 }
