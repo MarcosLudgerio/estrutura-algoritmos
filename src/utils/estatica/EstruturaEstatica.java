@@ -1,4 +1,4 @@
-package utils;
+package utils.estatica;
 
 import utils.estatica.EstruturaBase;
 

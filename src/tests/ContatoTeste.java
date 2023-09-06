@@ -1,3 +1,5 @@
+package tests;
+
 import utils.Contato;
 import utils.Lista;
 

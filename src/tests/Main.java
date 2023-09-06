@@ -1,3 +1,5 @@
+package tests;
+
 import utils.Lista;
 import utils.Vetor;
 import utils.VetorObjeto;
