@@ -20,11 +20,8 @@ public class Ex02 {
             System.out.println(pilha);
         }
 
-
-        if (!pilha.estaVazia()) {
-            while (pilha.getTamanho() != 0) {
-                System.out.println(" DESEMPILHANDO: " + pilha.desempilhar());
-            }
+        while (!pilha.estaVazia()) {
+            System.out.println("DESEMPILHANDO: " + pilha.desempilhar());
         }
     }
 }
