@@ -1,6 +1,6 @@
 package tests;
 
-import utils.Contato;
+import utils.model.Contato;
 import utils.Lista;
 
 import java.util.Scanner;
