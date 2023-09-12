@@ -4,10 +4,10 @@ import utils.estruturas.Pilha;
 
 public class PalidramoTeste {
     public static void main(String[] args) {
-        System.out.println(ePalidromo("AABBAA"));
-        System.out.println(ePalidromo("abccba"));
-        System.out.println(ePalidromo("abcabc"));
-        System.out.println(ePalidromo("ccaacda"));
+        System.out.println(testaPalidromo("AABBAA"));
+        System.out.println(testaPalidromo("abccba"));
+        System.out.println(testaPalidromo("abcabc"));
+        System.out.println(testaPalidromo("ccaacda"));
     }
 
     public static boolean ePalidromo(String carecteres) {
@@ -33,5 +33,20 @@ public class PalidramoTeste {
             }
         } while (!inverso.estaVazia());
         return retorno;
+    }
+
+    // Versão mais clen
+    public static boolean testaPalidromo(String carecteres) {
+        Pilha<Character> direto = new Pilha<>();
+
+        for (int i = 0; i < carecteres.length(); i++) {
+            char c = carecteres.charAt(i);
+            direto.empilhar(c);
+        }
+        StringBuilder inverso = new StringBuilder();
+        while (!direto.estaVazia()) {
+            inverso.append(direto.desempilhar());
+        }
+        return carecteres.contentEquals(inverso);
     }
 }
